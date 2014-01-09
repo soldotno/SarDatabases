@@ -1,6 +1,6 @@
 <?php
 
-namespace Databases;
+namespace SarDatabases;
 
 class SarMongo Extends \Mongo
 {

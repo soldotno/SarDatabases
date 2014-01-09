@@ -4,11 +4,11 @@
  *
  * @author Sven Anders Robbestad <robbestad@gmail.com>
  */
-namespace Databases\Tests;
+namespace SarDatabases\Tests;
 
-require_once __DIR__ . '/../../src/Databases/SarMongo.php';
+require_once __DIR__ . '/../../src/SarDatabases/SarMongo.php';
 
-use Databases\SarMongo;
+use SarDatabases\SarMongo;
 
     /**
      * ParserTest class test case
