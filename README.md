@@ -20,7 +20,6 @@ Add the following line to your **application.config.php**:
         'SarDatabases',
     ),
   
-
 In your code, include the class:
 
     use SarDatabases;
@@ -40,7 +39,6 @@ Supports:
 Tests: 
 
 execute **phpunit vendor/svenanders/sardatabases/tests/** from the root of your project to run the tests
-
 
 #####License:
 
