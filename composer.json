@@ -1,6 +1,6 @@
 {
     "name": "svenanders/sardatabases",
-    "type": "application",
+    "type": "sardatabases",
     "description": "Vanilla Database module for Zend Framework 2",
     "license": "public domain",
     "authors": [
@@ -11,5 +11,10 @@
     ],
     "require": {
     "php": ">=5"
+    },
+    "autoload": {
+        "classmap": [
+            "/vendor/svenanders/sardatabases/Module.php"
+        ]
     }
 }
