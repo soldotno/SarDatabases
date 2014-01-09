@@ -39,6 +39,10 @@ Supports:
     ->update
     ->delete
 
+Tests: 
+
+    execute **phpunit vendor/svenanders/sardatabases/tests/** to run the tests
+
 ==
 License:
 
