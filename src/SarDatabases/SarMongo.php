@@ -106,8 +106,6 @@ class SarMongo Extends \Mongo
    {
        $this->_modify_no_cow($this->collection, $mongoId, $array);
        return $array;
-     // one liner... However, this triggers copy-on-write and makes _id unavailable
-     // return $this->collection->update(array("_id"=>new \MongoId($mongoId)),$array);
    }
 
 }
