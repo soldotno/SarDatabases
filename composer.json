@@ -1,0 +1,15 @@
+{
+    "name": "svenanders/sardatabases",
+    "type": "application",
+    "description": "Vanilla Database module for Zend Framework 2",
+    "license": "public domain",
+    "authors": [
+        {
+        "name": "Sven Anders Robbestad",
+        "email": "robbestad@gmail.com"
+        }
+    ],
+    "require": {
+    "php": ">=5"
+    }
+}
