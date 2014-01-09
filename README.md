@@ -1,10 +1,8 @@
-Plain Database module for ZF2
-==============================
+#Plain Database module for ZF2
+
 A ZF2 module to make connecting to databases a breeze
 
 Currently only includes support for MongoDB, but more will be added eventually
-
-== 
 
 ###More info
 
@@ -43,8 +41,8 @@ Tests:
 
 execute **phpunit vendor/svenanders/sardatabases/tests/** from the root of your project to run the tests
 
-==
-License:
+
+#####License:
 
 Sven Anders Robbestad (C) 2014
 
