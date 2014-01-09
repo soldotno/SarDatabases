@@ -14,7 +14,7 @@
     },
     "autoload": {
         "classmap": [
-            "/vendor/svenanders/sardatabases/Module.php"
+            "sardatabases/Module.php"
         ]
     }
 }
