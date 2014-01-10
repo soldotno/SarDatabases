@@ -2,28 +2,56 @@
 
 namespace SarDatabases;
 
-class SarMongo Extends \Mongo
+class SarMongo Extends \MongoClient
 {
-    private $systemName;
     public $conn;
     protected $db;
     protected $collection;
+    private $systemName;
 
-    public function __construct($env,$systemName,$collectionName="feed")
+
+
+    public function __construct($env, $systemName, $collectionName = "db")
     {
-    if (empty($env) || empty($systemName)) {
-       return false;
+        //$host = $this->getServiceLocator()->get('config')["sardatabases"]["host"];
+
+
+        $host = $this->getConfig()["sardatabases"]["host"][$this->getConfig()["sardatabases"]["environment"]];
+
+        if (empty($env) || empty($systemName)) {
+            return false;
+        }
+
+        switch ($env) {
+            default:
+                $this->conn = new \MongoClient($host);
+                $this->db = $this->conn->$systemName;
+                $this->collection = $this->db->$collectionName;
+                break;
+
+        }
+        return $this->conn;
     }
 
-    switch($env){
-         default:
-             $this->conn = new \Mongo("mongodb://localhost");
-             $this->db = $this->conn->$systemName;
-             $this->collection = $this->db->$collectionName;
-             break;
-
+    public function count()
+    {
+        return $this->collection->count();
     }
-    return $this->conn;
+
+    public function getConfig()
+    {
+        return include (dirname(__DIR__ )). '/../config/module.config.php';
+    }
+
+    /**
+     * Inserts array
+     * @param $array
+     * @return mixed
+     */
+    public function insertOne($array = array('x' => 1))
+    {
+        $this->_insert_no_cow($this->collection, $array);
+        return (string)$array["_id"];
     }
 
     /**
@@ -37,37 +65,6 @@ class SarMongo Extends \Mongo
     }
 
     /**
-     * Wrapping function to prevent triggering copy-on-write in order to make the _id available
-     * @param $collection
-     * @param $mongoId
-     * @param $array
-     */
-    private function _modify_no_cow($collection, $mongoId, $array)
-    {
-        //$collection->findAndModify(array("_id"=>new \MongoId($mongoId)), $array);
-        $collection->update(array("_id"=>new \MongoId($mongoId)), $array);
-    }
-
-
-    public function count()
-    {
-        return $this->collection->count();
-    }
-
-
-
-    /**
-     * Inserts array
-     * @param $array
-     * @return mixed
-     */
-    public function insertOne($array=array('x' => 1))
-    {
-        $this->_insert_no_cow($this->collection, $array);
-        return $array["_id"];
-    }
-
-    /**
      * @param $array
      * @return mixed
      */
@@ -75,7 +72,6 @@ class SarMongo Extends \Mongo
     {
         return $this->collection->find($array);
     }
-
 
     /**
      * @param $array
@@ -86,7 +82,6 @@ class SarMongo Extends \Mongo
         return $this->collection->remove($array);
     }
 
-
     /**
      * Deletes a MongoId from the mongo database
      * @param $mongoId
@@ -94,7 +89,7 @@ class SarMongo Extends \Mongo
      */
     public function deleteOne($mongoId)
     {
-        return $this->collection->remove(array("_id"=>new \MongoId($mongoId)));
+        return $this->collection->remove(array("_id" => new \MongoId($mongoId)));
     }
 
     /**
@@ -102,10 +97,22 @@ class SarMongo Extends \Mongo
      * @param $array
      * @return mixed
      */
-   public function updateOne($mongoId,$array)
-   {
-       $this->_modify_no_cow($this->collection, $mongoId, $array);
-       return $array;
-   }
+    public function updateOne($mongoId, $array)
+    {
+        $this->_modify_no_cow($this->collection, $mongoId, $array);
+        return $array;
+    }
+
+    /**
+     * Wrapping function to prevent triggering copy-on-write in order to make the _id available
+     * @param $collection
+     * @param $mongoId
+     * @param $array
+     */
+    private function _modify_no_cow($collection, $mongoId, $array)
+    {
+        //$collection->findAndModify(array("_id"=>new \MongoId($mongoId)), $array);
+        $collection->update(array("_id" => new \MongoId($mongoId)), $array);
+    }
 
 }

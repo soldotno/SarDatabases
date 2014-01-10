@@ -47,7 +47,7 @@ class SarmongoTest extends \PHPUnit_Framework_TestCase
 
         // Assert that we can delete this entry
         $drop =$mongoconn->deleteOne($mongoId);
-        $this->assertNotEmpty((string)$drop);
+        $this->assertNotEmpty($drop);
     }
 
     public function testCanInsertSingleElement()
@@ -71,7 +71,7 @@ class SarmongoTest extends \PHPUnit_Framework_TestCase
     {
         $mongoconn = new SarMongo("prod", "_test");
         $mongoId =$mongoconn->delete(array("sar"=>"var her"));
-        $this->assertNotEmpty((string)$mongoId);
+        $this->assertNotEmpty($mongoId);
     }
 
 
