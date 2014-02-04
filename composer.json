@@ -1,5 +1,5 @@
 {
-    "name": "svenanders/sardatabases",
+    "name": "soldotno/sardatabases",
     "type": "sardatabases",
     "description": "Vanilla Database module for Zend Framework 2",
     "license": "public domain",
